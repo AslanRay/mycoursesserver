@@ -9,6 +9,10 @@ const app = express();
 
 app.set('Port', DEFAULT_SERVER_PORT);
 
+app.get('/', (request, response) => {
+  response.send('Hello World');
+});
+
 app.listen(app.get('Port'), () => {
-  console.log(`En el puerto ${app.get('Port')}`);
+  console.log(`Server started on port ${app.get('Port')}`);
 });
