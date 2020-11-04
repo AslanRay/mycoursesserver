@@ -7,6 +7,6 @@ const courseTypeSchema = new mongoose.Schema({
   },
 });
 
-const CourseType = mongoose.model('User', courseTypeSchema);
+const CourseType = mongoose.model('CourseTypes', courseTypeSchema);
 
 module.exports = CourseType;

@@ -15,6 +15,23 @@ const courseSchema = new mongoose.Schema({
   },
 });
 
-const Course = mongoose.model('User', courseSchema);
+courseSchema.set('toJSON', { virtuals: true });
 
-module.exports = Course;
+const Course = mongoose.model('Courses', courseSchema);
+
+exports.find = () => Course.find();
+
+exports.findById = (id) => Course.findById(id);
+
+exports.save = (newCourse) => {
+  const course = new Course(newCourse);
+  return course.save();
+};
+
+exports.update = (id, newFields) => Course.findByIdAndUpdate(
+  id,
+  { $set: newFields },
+  { new: true },
+);
+
+exports.delete = (id) => Course.findByIdAndDelete(id);
