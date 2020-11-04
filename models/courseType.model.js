@@ -7,6 +7,23 @@ const courseTypeSchema = new mongoose.Schema({
   },
 });
 
+courseTypeSchema.set('toJSON', { virtuals: true });
+
 const CourseType = mongoose.model('CourseTypes', courseTypeSchema);
 
-module.exports = CourseType;
+exports.find = () => CourseType.find();
+
+exports.findById = (id) => CourseType.findById(id);
+
+exports.save = (newCourseType) => {
+  const courseType = new CourseType(newCourseType);
+  return courseType.save();
+};
+
+exports.update = (id, newFields) => CourseType.findByIdAndUpdate(
+  id,
+  { $set: newFields },
+  { new: true },
+);
+
+exports.delete = (id) => CourseType.findByIdAndDelete(id);

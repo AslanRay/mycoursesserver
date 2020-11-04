@@ -1,50 +1,48 @@
-const CourseModel = require('../models/course.model');
+const CourseTypeModel = require('../models/courseType.model');
 
 exports.findAll = async (request, response) => {
-  const courses = await CourseModel.find();
+  const courseType = await CourseTypeModel.find();
 
   response.status(200).send({
-    data: courses,
+    data: courseType,
   });
 };
 
 exports.findById = async (request, response) => {
   const { id } = request.params;
-  const course = await CourseModel.findById(id);
+  const courseType = await CourseTypeModel.findById(id);
 
-  if (course) {
+  if (courseType) {
     response.status(200).send({
-      data: course,
+      data: courseType,
     });
   } else {
     response.status(404).send({
       data: null,
-      message: `Course ${id} not found`,
+      message: `CourseType ${id} not found`,
     });
   }
 };
 
 exports.save = async (request, response) => {
-  const { name, link, description } = request.body;
+  const { name } = request.body;
 
-  await CourseModel.save({ name, link, description });
+  await CourseTypeModel.save({ name });
 
   response.status(201).send({});
 };
 
 exports.update = async (request, response) => {
   const { id } = request.params;
-  const {
-    name, link, description,
-  } = request.body;
+  const { name } = request.body;
 
-  await CourseModel.update(id, { name, link, description });
+  await CourseTypeModel.update(id, { name });
 
   response.status(204).send();
 };
 
 exports.delete = async (request, response) => {
   const { id } = request.params;
-  await CourseModel.delete(id);
+  await CourseTypeModel.delete(id);
   response.status(204).send();
 };
