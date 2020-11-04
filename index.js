@@ -15,7 +15,7 @@ app.get('/', (request, response) => {
   response.send('Hello World');
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 userRouters.routersConfig(app);
 
 app.listen(app.get('Port'), () => {
