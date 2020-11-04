@@ -4,7 +4,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require('./database');
 const { DEFAULT_SERVER_PORT } = require('./utils/constants.js');
-const { userRouter } = require('./routes/routerIndex');
+// const { userRouter } = require('./routes/routerIndex');
+const userRouters = require('./routes/user.router');
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.get('/', (request, response) => {
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/api', userRouter);
+userRouters.routersConfig(app);
 
 app.listen(app.get('Port'), () => {
   console.log(`Server started on port ${app.get('Port')}`);

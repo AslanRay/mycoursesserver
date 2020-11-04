@@ -15,8 +15,13 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model('User', userSchema);
+userSchema.set('toJSON', { virtuals: true });
 
-module.exports = User;
+const User = mongoose.model('Users', userSchema);
 
-module.exports = User;
+exports.find = () => User.find();
+
+exports.save = (newUser) => {
+  const user = new User(newUser);
+  return user.save();
+};
