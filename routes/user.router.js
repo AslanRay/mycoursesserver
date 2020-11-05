@@ -6,11 +6,11 @@
 const UserController = require('../controllers/user.controller');
 
 exports.routersConfig = (app) => {
-  app.get('/api/users', UserController.findAll);
-  app.post('/api/users', UserController.save);
-  app.get('/api/users/:id', UserController.findById);
-  app.patch('/api/users/:id', UserController.update);
-  app.delete('/api/users/:id', UserController.delete);
+  app.get('/api/v1/users', UserController.findAll);
+  app.post('/api/v1/users', UserController.save);
+  app.get('/api/v1/users/:id', UserController.findById);
+  app.patch('/api/v1/users/:id', UserController.update);
+  app.delete('/api/v1/users/:id', UserController.delete);
 };
 
 // userRouter.get('/api/users', (request, response) => {

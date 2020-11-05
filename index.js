@@ -18,6 +18,8 @@ app.get('/', (request, response) => {
 
 app.use(bodyParser.json());
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
 userRouters.routersConfig(app);
 
 courseRouters.routersConfig(app);
