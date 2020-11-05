@@ -1,4 +1,5 @@
 const UserModel = require('../models/user.model');
+const { createHashedPassword } = require('../utils/createHashedPassword');
 
 exports.findAll = async (request, response) => {
   const users = await UserModel.find();
@@ -27,7 +28,9 @@ exports.findById = async (request, response) => {
 exports.save = async (request, response) => {
   const { name, email, password } = request.body;
 
-  await UserModel.save({ name, email, password });
+  const hashedPassword = await createHashedPassword(password);
+
+  await UserModel.save({ name, email, password: hashedPassword });
 
   response.status(201).send({});
 };
