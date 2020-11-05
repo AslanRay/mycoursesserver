@@ -31,3 +31,5 @@ exports.save = (newUser) => {
 exports.update = (id, newFields) => User.findByIdAndUpdate(id, { $set: newFields }, { new: true });
 
 exports.delete = (id) => User.findByIdAndDelete(id);
+
+exports.findByEmail = (email) => User.findOne({ email });

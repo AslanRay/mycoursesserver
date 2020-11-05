@@ -1,5 +1,15 @@
+const dotenv = require('dotenv');
 const UserModel = require('../models/user.model');
 const { createHashedPassword } = require('../utils/createHashedPassword');
+const { compareHashedPassword } = require('../utils/compareHashedPassword');
+const { generateJWT } = require('../utils/generateJWT');
+
+dotenv.config();
+
+const {
+  JWT_KEY,
+  TOKEN_EXPIRATION,
+} = process.env;
 
 exports.findAll = async (request, response) => {
   const users = await UserModel.find();
@@ -50,4 +60,26 @@ exports.delete = async (request, response) => {
   const { id } = request.params;
   await UserModel.delete(id);
   response.status(204).send();
+};
+
+exports.login = async (request, response) => {
+  const { email, password } = request.body;
+  const user = await UserModel.findByEmail(email);
+  if (user) {
+    const isPaswordValid = await compareHashedPassword(password, user.password);
+    const token = generateJWT(user, JWT_KEY, TOKEN_EXPIRATION);
+    if (isPaswordValid) {
+      response.status(200).send({ data: user, token });
+    } else {
+      response.status(404).send({
+        data: null,
+        message: 'Wrong email or password',
+      });
+    }
+  } else {
+    response.status(404).send({
+      data: null,
+      message: 'Wrong email or password',
+    });
+  }
 };

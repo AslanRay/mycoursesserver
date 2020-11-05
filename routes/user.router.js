@@ -11,6 +11,7 @@ exports.routersConfig = (app) => {
   app.get('/api/v1/users/:id', UserController.findById);
   app.patch('/api/v1/users/:id', UserController.update);
   app.delete('/api/v1/users/:id', UserController.delete);
+  app.post('/api/v1/login', UserController.login);
 };
 
 // userRouter.get('/api/users', (request, response) => {
