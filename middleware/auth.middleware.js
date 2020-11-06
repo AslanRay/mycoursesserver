@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const ErrorLoggModel = require('../models/errorLogg.model');
 
 dotenv.config();
 
@@ -19,7 +20,7 @@ exports.validJWTNeeded = (request, response, next) => {
       request.jwt = jwt.verify(authorization[1], secret);
       return next();
     } catch (err) {
-      console.log('error', { err, secret });
+      ErrorLoggModel.save({ where: 'Auth middleware', errorMessage: err.message, loggedAt: new Date() });
       return response.status(403).send();
     }
   } else {
