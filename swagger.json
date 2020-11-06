@@ -1,0 +1,158 @@
+{
+  "swagger":"2.0",
+  "info":{
+     "version":"1.0.0",
+     "title":"My courses server",
+     "description":"My courses server API",
+     "license":{
+        "name":"MIT",
+        "url":"https://opensource.org/licenses/MIT"
+     }
+  },
+  "host":"localhost:4000",
+  "basePath":"/",
+  "tags":[
+     {
+        "name":"Users Courses Tracker",
+        "description":"API for users courses tracker"
+     }
+  ],
+  "schemes":[
+     "http"
+  ],
+  "consumes":[
+     "application/json"
+  ],
+  "produces":[
+     "application/json"
+  ],
+  "paths":{
+    "/api/v1/userCoursesTracker":{
+       "get":{
+          "tags":[
+             "Users Courses Tracker"
+          ],
+          "summary":"Get all saved users courses with their logged time",
+          "responses":{
+             "200":{
+                "description":"OK",
+                "schema":{
+                   "$ref":"#/definitions/UserCoursesTracker"
+                }
+             }
+          }
+       },
+       "post":{
+        "tags":[
+           "Users Courses Tracker"
+        ],
+        "summary":"Create new user course timestamp",
+        "parameters":[
+          {
+             "name":"userCoursesTracker",
+             "in":"body",
+             "description":"Values need to create new user courses track",
+             "schema":{
+                "$ref":"#/definitions/UserCoursesTracker"
+             }
+          }
+       ],
+        "responses":{
+           "201":{
+              "description":"OK",
+              "schema":{
+                 "$ref":"#/definitions/UserCoursesTracker"
+              }
+           }
+        }
+     }
+    },
+    "/api/v1/userCoursesTracker/{id}": {
+      "get":{
+        "tags":[
+           "Users Courses Tracker"
+        ],
+        "summary":"Get users courses with their logged time by id",
+        "responses":{
+           "200":{
+              "description":"OK",
+              "schema":{
+                 "$ref":"#/definitions/UserCoursesTracker"
+              }
+           }
+        }
+     },
+     "put":{
+      "summary":"Update user courses tracker info with give ID",
+      "tags":[
+         "Users Courses Tracker"
+      ],
+      "parameters":[
+         {
+            "name":"userCoursesTracker",
+            "in":"body",
+            "description":"New values of properties",
+            "schema":{
+               "$ref":"#/definitions/UserCoursesTracker"
+            }
+         }
+      ],
+      "responses":{
+         "200":{
+            "description":"User is updated",
+            "schema":{
+               "$ref":"#/definitions/User"
+            }
+         }
+      }
+   },
+   "delete":{
+    "tags":[
+       "Users Courses Tracker"
+    ],
+    "summary":"Delete users courses with their logged time by id",
+    "responses":{
+       "200":{
+          "description":"OK",
+          "schema":{
+             "$ref":"#/definitions/UserCoursesTracker"
+          }
+       }
+    }
+ }
+  }
+ },
+ "definitions":{
+    "UserCoursesTracker":{
+       "required":[
+          "userName",
+          "courseName",
+          "courseType",
+          "loggedTime"
+       ],
+       "properties":{
+          "_id":{
+             "type":"integer",
+             "uniqueItems":true
+          },
+          "userName":{
+             "type":"string"
+          },
+          "courseName": {
+            "type":"string"
+          },
+          "courseType": {
+            "type":"string"
+          },
+          "loggedTime": {
+            "type":"string"
+          }
+       }
+    },
+    "UsersCoursesTracker":{
+       "type":"array",
+       "$ref":"#/definitions/UserCoursesTracker"
+    }
+ }
+
+}
