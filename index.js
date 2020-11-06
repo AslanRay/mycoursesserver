@@ -7,6 +7,7 @@ const { DEFAULT_SERVER_PORT } = require('./utils/constants.js');
 const userRouters = require('./routes/user.router');
 const courseRouters = require('./routes/course.router');
 const courseTypeRouters = require('./routes/courseType.router');
+const errorLoggRouters = require('./routes/errorLogg.router');
 
 const app = express();
 
@@ -27,6 +28,8 @@ userRouters.routersConfig(app);
 courseRouters.routersConfig(app);
 
 courseTypeRouters.routersConfig(app);
+
+errorLoggRouters.routersConfig(app);
 
 app.listen(app.get('Port'), () => {
   console.log(`Server started on port ${app.get('Port')}`);
