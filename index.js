@@ -8,6 +8,7 @@ const userRouters = require('./routes/user.router');
 const courseRouters = require('./routes/course.router');
 const courseTypeRouters = require('./routes/courseType.router');
 const errorLoggRouters = require('./routes/errorLogg.router');
+const userCoursesTrackerRouters = require('./routes/userCoursesTracker.router');
 
 const app = express();
 
@@ -30,6 +31,8 @@ courseRouters.routersConfig(app);
 courseTypeRouters.routersConfig(app);
 
 errorLoggRouters.routersConfig(app);
+
+userCoursesTrackerRouters.routersConfig(app);
 
 app.listen(app.get('Port'), () => {
   console.log(`Server started on port ${app.get('Port')}`);
