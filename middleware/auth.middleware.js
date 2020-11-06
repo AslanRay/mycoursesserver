@@ -10,8 +10,6 @@ const {
 const secret = JWT_KEY;
 
 exports.validJWTNeeded = (request, response, next) => {
-  // console.log('middlware');
-  // return next();
   if (request.headers.authorization) {
     try {
       const authorization = request.headers.authorization.split(' ');
